@@ -113,6 +113,22 @@ create table board_file_table
             on delete cascade
 );
 ```
+```sql
+create table comment_table
+(
+    id              bigint auto_increment
+        primary key,
+    commentWriter   varchar(20)                        null,
+    commentContents varchar(200)                       null,
+    createdAt       datetime default CURRENT_TIMESTAMP null,
+    boardId         bigint                             null,
+    likeAmount      bigint   default 0                 null,
+    likeMemberJson  json                               null,
+    constraint comment_table_ibfk_1
+        foreign key (boardId) references board_table (id)
+            on delete cascade
+);
+```
 
 ```sql
 create table comment_like_table
@@ -131,6 +147,8 @@ create table comment_like_table
 );
 
 ```
+
+
 
 ```sql
 create table member_table
